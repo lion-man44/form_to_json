@@ -68,4 +68,4 @@ const formToJSON = ($form) => {
   return json;
 };
 
-export default formToJSON;
+module.exports = formToJSON;

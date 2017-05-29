@@ -8,7 +8,7 @@ test.beforeEach(t => {
     <input type='hidden' name='csrf_token' value='hoge1234foo4321' />
     <div>
       <input type='text' name='name' value='username' />
-      <input type='checkbox' name='alive_flg' checked/>
+      <input type='checkbox' name='alive_flg' checked />
     </div>
     <div>
       <select name='created_user_id'>
@@ -25,6 +25,14 @@ test.beforeEach(t => {
         <option value='1' selected>user 1</option>
         <option value='2'>user 2</option>
       </select>
+    </div>
+    <div>
+      <input type='checkbox' name='checkboxes[]'>
+      <input type='checkbox' name='checkboxes[]' checked>
+      <input type='checkbox' name='checkboxes[]' checked>
+      <input type='checkbox' name='checkboxes[]'>
+      <input type='checkbox' name='checkboxes[]'>
+      <input type='checkbox' name='checkboxes[]' checked>
     </div>
   </form>
   `);
@@ -53,4 +61,9 @@ test('Should be created_user_id is valid', t => {
 test('Should be user_ids[] is valid', t => {
   const json = formToJSON(t.context.$form.window.document.querySelector('form'));
   t.deepEqual(json.friend_ids, ['2', '1']);
+});
+
+test('Should be checkboxes[] is valid', t => {
+  const json = formToJSON(t.context.$form.window.document.querySelector('form'));
+  t.deepEqual(json.checkboxes, [false, true, true, false, false, true]);
 });

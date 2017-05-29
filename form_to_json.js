@@ -27,6 +27,14 @@ const removeBracket = val => {
 const isMultiSelect = $el => $el.options && $el.multiple;
 
 /**
+ * Element type is checkbox?
+ *
+ * @param {string} type - element.type
+ * @return {boolean} checkbox = true
+ */
+const isCheckbox = type => type === 'checkbox';
+
+/**
  * Get selected options from a multi-select as an array
  * @param {HTMLOptionsCollection} $options - options for the select
  * @return {array} an array of selected option values
@@ -42,15 +50,19 @@ const getSelectedValues = $options => [].reduce.call($options, (arr, opt) => opt
  */
 const toJSON = elements => [].reduce.call(elements, (data, element) => {
   const json = data;
+  const name = element.name;
+  const type = element.type;
 
-  if (isMultipleName(element.name)) {
-    json[removeBracket(element.name)] = (json[removeBracket(element.name)] || []).concat(element.value);
+  if (isMultipleName(name)) {
+    const rmName = removeBracket(name);
+    if (isCheckbox(type)) json[rmName] = (json[rmName] || []).concat(element.checked);
+    else json[rmName] = (json[rmName] || []).concat(element.value);
   } else if (isMultiSelect(element)) {
-    json[element.name] = getSelectedValues(element);
-  } else if (element.type === 'checkbox') {
-    json[element.name] = element.checked;
+    json[name] = getSelectedValues(element);
+  } else if (isCheckbox(type)) {
+    json[name] = element.checked;
   } else {
-    json[element.name] = element.value;
+    json[name] = element.value;
   }
 
   return json;

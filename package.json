@@ -1,6 +1,6 @@
 {
   "name": "@orange-lion/form-to-json",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "lion-man44 <lion44man@gmail.com>",
   "description": "form value is to be JSON",
   "main": "form_to_json.js",
@@ -45,8 +45,8 @@
   },
   "keywords": [
     "form",
-    "to",
-    "json"
+    "json",
+    "form to json"
   ],
   "license": "MIT",
   "bugs": {

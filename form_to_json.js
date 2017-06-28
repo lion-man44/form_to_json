@@ -56,7 +56,14 @@ const toJSON = elements => [].reduce.call(elements, (data, element) => {
   if (isMultipleName(name)) {
     const rmName = removeBracket(name);
     if (isCheckbox(type)) json[rmName] = (json[rmName] || []).concat(element.checked);
-    else json[rmName] = (json[rmName] || []).concat(element.value);
+    else {
+      const vals = Array.from(element.options).map((opt, i) => {
+        if (opt.selected && opt.value !== '') return opt.value;
+        return null;
+      });
+      const result = vals.filter(v => v !== null);
+      json[rmName] = (json[rmName] || []).concat(result);
+    }
   } else if (isMultiSelect(element)) {
     json[name] = getSelectedValues(element);
   } else if (isCheckbox(type)) {

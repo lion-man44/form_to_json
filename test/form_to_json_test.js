@@ -34,6 +34,16 @@ test.beforeEach(t => {
       <input type='checkbox' name='checkboxes[]'>
       <input type='checkbox' name='checkboxes[]' checked>
     </div>
+    <div>
+      <select name='tags[]'>
+        <option value=''>tag 1</option>
+        <option value=''>tag 2</option>
+      </select>
+      <select name='tags[]'>
+        <option value=''>tag 1</option>
+        <option value=''>tag 2</option>
+      </select>
+    </div>
   </form>
   `);
 });
@@ -66,4 +76,9 @@ test('Should be user_ids[] is valid', t => {
 test('Should be checkboxes[] is valid', t => {
   const json = formToJSON(t.context.$form.window.document.querySelector('form'));
   t.deepEqual(json.checkboxes, [false, true, true, false, false, true]);
+});
+
+test('Should be empty tags[] is valid', t => {
+  const json = formToJSON(t.context.$form.window.document.querySelector('form'));
+  t.deepEqual(json.tags, []);
 });

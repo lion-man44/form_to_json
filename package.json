@@ -1,6 +1,6 @@
 {
   "name": "@orange-lion/form-to-json",
-  "version": "0.3.0",
+  "version": "0.3.1-pre",
   "author": "lion-man44 <lion44man@gmail.com>",
   "description": "form value is to be JSON",
   "main": "form_to_json.js",
